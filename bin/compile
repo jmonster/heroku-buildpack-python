@@ -208,6 +208,14 @@ bpwatch start anvil_appdir_commit
   if [ "$SLUG_ID" ]; then
     deep-mv $TMP_APP_DIR $APP_DIR
   fi
-
 bpwatch stop anvil_appdir_commit
+
+bpwatch start installgcc
+  sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+  sudo apt-get update
+  sudo apt-get -y install gcc-4.7 g++-4.7 gcc-4.7-base
+  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 20
+  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.7 20
+bpwatch stop installgcc
+
 bpwatch stop compile
